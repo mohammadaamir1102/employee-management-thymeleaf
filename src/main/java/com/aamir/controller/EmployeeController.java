@@ -47,7 +47,6 @@ public class EmployeeController {
 		
 		// get employee from the service
 		Employee employee = employeeService.getEmployeeById(id);
-		
 		// set employee as a model attribute to pre-populate the form
 		model.addAttribute("employee", employee);
 		return "update_employee";
@@ -83,4 +82,5 @@ public class EmployeeController {
 		model.addAttribute("listEmployees", listEmployees);
 		return "index";
 	}
+	
 }
