@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "employees")
@@ -17,21 +20,30 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@NotBlank(message = "First Name is required")
 	@Column(name = "first_name")
 	private String firstName;
 
+	@NotBlank(message = "Last Name is required")
 	@Column(name = "last_name")
 	private String lastName;
 
+	@NotBlank(message = "Email is required")
+    @Email(message = "Invalid email address")
 	@Column(name = "email")
 	private String email;
 
+	@NotBlank(message = "Salary is required")
+    @Pattern(regexp = "^[0-9]+(\\.[0-9]{1,2})?$", message = "Invalid salary format")
 	@Column(name = "salary")
-	private Double salary;
+	private String salary;
 
+	@NotBlank(message = "Address is required")
 	@Column(name = "address")
 	private String address;
 
+	@NotBlank(message = "Phone no is required")
+    @Pattern(regexp = "^[6-9]\\d{9}$", message = "Invalid phone number format")
 	@Column(name = "phone")
 	private String phone;
 
@@ -80,11 +92,11 @@ public class Employee {
 		this.email = email;
 	}
 
-	public Double getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 
-	public void setSalary(Double salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 

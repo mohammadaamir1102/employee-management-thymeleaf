@@ -28,7 +28,11 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> <b>Logout</b></a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/showNewEmployeeForm}"> <b>Add Employee</b></a></li>
 				</ul>
 			</div>
 		</div>
@@ -36,11 +40,13 @@
 
 	<br>
 	<br>
+	<br>
 	
 	<div class="container-fluid">
-	<h1>Employees List</h1>
+	<h2 class="text-center">Employees List</h2>
+	<br>
 	
-	<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a><br>
+	<!--<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a><br>-->
 	
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
@@ -82,7 +88,7 @@
 					<a th:href="@{'/page/' + ${currentPage} + '?sortField=taxAmount&sortDir=' + ${reverseSortDir}}">
 							Tax Amount (Yearly)</a>
 					</th>
-					<th> Actions </th>
+					<th class="text-primary"> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -102,8 +108,8 @@
 			</tbody>
 		</table>
 		
-		<div th:if = "${totalPages > 1}">
-			<div class = "row col-sm-10">
+		<div  th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10 text-center	">
 				<div class = "col-sm-2">
 					Total Rows: [[${totalItems}]] 
 				</div>
@@ -114,13 +120,13 @@
 					</span>
 				</div>
 				<div class = "col-sm-1">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-					<span th:unless="${currentPage < totalPages}">Next</span>
+					<a class="btn btn-primary" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span class="btn btn-primary"  th:unless="${currentPage < totalPages}">Next</span>
 				</div>
 				
 				 <div class="col-sm-1">
-    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-					<span th:unless="${currentPage < totalPages}">Last</span>
+    				<a class="btn btn-primary" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span class="btn btn-primary" th:unless="${currentPage < totalPages}">Last</span>
    				 </div>
 			</div>
 		</div>

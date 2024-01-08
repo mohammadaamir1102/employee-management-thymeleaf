@@ -2,10 +2,13 @@ package com.aamir.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,8 +39,11 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/saveEmployee")
-	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+	public String saveEmployee( @Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
 		// save employee to database
+		if(bindingResult.hasErrors()) {
+			return "new_employee";
+		}
 		employeeService.saveEmployee(employee);
 		return "redirect:/";
 	}

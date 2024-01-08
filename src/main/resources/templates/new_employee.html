@@ -1,45 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Employee Management System</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-</head>
-<body>
-	<div class="container">
-		<h1>Employee Management System</h1>
-		<hr>
-		<h2>Save Employee</h2>
 
-		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
-			method="POST">
-			<input type="text" th:field="*{firstName}"
-				placeholder="Employee First Name" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{lastName}"
-				placeholder="Employee Last Name" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{email}"
-				placeholder="Employee Email" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{salary}"
-				placeholder="Employee Yearly Salary" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{address}"
-				placeholder="Employee Address" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{phone}"
-				placeholder="Employee Phone No" class="form-control mb-4 col-4">
-				
-				<button type="submit" class="btn btn-info col-2"> Save Employee</button>
-		</form>
-		
-		<hr>
-		
-		<a th:href = "@{/}"> Back to Employee List</a>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee Management System</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Employee Management System</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> <b>Logout</b></a></li>
+				</ul>
+
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/}"> <b>Back to Employee List</b></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav><br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<h2 class="text-center">Save Employee</h2>
+
+				<form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="POST">
+
+					<div>
+						<label class="control-label" for="firstName"> First Name </label>
+						<input type="text" th:field="*{firstName}"
+							th:classappend="${#fields.hasErrors('firstName')? 'is-invalid' : ''}"
+							class="form-control mb-4 col-4">
+						<div th:each="err : ${#fields.errors('firstName')}" th:text="${err}" class="invalid-feedback">
+						</div>
+					</div>
+
+					<div>
+						<label class="control-label" for="lastName"> Last Name </label>
+						<input type="text" th:field="*{lastName}"
+							th:classappend="${#fields.hasErrors('lastName')? 'is-invalid' : ''}"
+							class="form-control mb-4 col-4">
+						<div th:each="err : ${#fields.errors('lastName')}" th:text="${err}" class="invalid-feedback">
+						</div>
+					</div>
+
+					<div>
+						<label class="control-label" for="email"> Email </label>
+						<input type="text" th:field="*{email}"
+							th:classappend="${#fields.hasErrors('email')? 'is-invalid' : ''}"
+							class="form-control mb-4 col-4">
+						<div th:each="err : ${#fields.errors('email')}" th:text="${err}" class="invalid-feedback">
+						</div>
+					</div>
+
+					<div>
+						<label class="control-label" for="salary"> Salary </label>
+						<input type="text" th:field="*{salary}"
+							th:classappend="${#fields.hasErrors('salary')? 'is-invalid' : ''}"
+							class="form-control mb-4 col-4">
+						<div th:each="err : ${#fields.errors('salary')}" th:text="${err}" class="invalid-feedback">
+						</div>
+					</div>
+
+					<div>
+						<label class="control-label" for="address"> Address </label>
+						<input type="text" th:field="*{address}"
+							th:classappend="${#fields.hasErrors('address')? 'is-invalid' : ''}"
+							class="form-control mb-4 col-4">
+						<div th:each="err : ${#fields.errors('address')}" th:text="${err}" class="invalid-feedback">
+						</div>
+					</div>
+
+					<div>
+						<label class="control-label" for="phone"> Phone no </label>
+						<input type="text" th:field="*{phone}"
+							th:classappend="${#fields.hasErrors('phone')? 'is-invalid' : ''}"
+							class="form-control mb-4 col-4">
+						<div th:each="err : ${#fields.errors('phone')}" th:text="${err}" class="invalid-feedback">
+						</div>
+					</div><br>
+
+
+					<button type="submit" class="form-control btn btn-primary">Save Employee</button>
+
+					<!--<button type="submit" class="btn btn-info col-2"> Save Employee</button>-->
+				</form>
+
+				<hr>
+			</div>
+		</div>
+	</div>
+
+
+	<!--		<a th:href = "@{/}"> Back to Employee List</a>-->
 	</div>
 </body>
+
 </html>

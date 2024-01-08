@@ -30,9 +30,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void saveEmployee(Employee employee) {
-		Double pfAmount = employee.getSalary() * 0.08;
+		Double pfAmount = Double.valueOf(employee.getSalary()) * 0.08;
 		employee.setPfAmount(pfAmount);
-		employee.setTaxAmount(calculateIncomeTax(employee.getSalary()));
+		employee.setTaxAmount(calculateIncomeTax(Double.valueOf(employee.getSalary())));
 		employee.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(EMConstant.INDIA_TIMEZOME))));
 		employee.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(EMConstant.INDIA_TIMEZOME))));
 		this.employeeRepository.save(employee);
